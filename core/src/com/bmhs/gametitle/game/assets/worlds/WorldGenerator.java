@@ -21,6 +21,7 @@ public class WorldGenerator {
 
         //call methods to build 2D array
         randomize();
+        leftCoast();
 
         Gdx.app.error("WorldGenerator", "WorldGenerator(WorldTile[][][])");
     }
@@ -38,6 +39,15 @@ public class WorldGenerator {
         return returnString;
     }
 
+    public void leftCoast() {
+        for (int r = 0; r < worldIntMap.length; r++) {
+            for (int c = 0; c < worldIntMap[r].length; c++) {
+                if(c < 1 || c > worldIntMap[r].length - 2 || r < 1  || r > worldIntMap.length - 2) {
+                    worldIntMap[r][c] = 0;
+                }
+            }
+        }
+    }
     public void randomize() {
         for(int r = 0; r < worldIntMap.length; r++) {
             for(int c = 0; c < worldIntMap[r].length; c++) {
