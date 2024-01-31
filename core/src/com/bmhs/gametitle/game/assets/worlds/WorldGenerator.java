@@ -21,21 +21,38 @@ public class WorldGenerator {
         this.worldMapRows = worldMapRows;
         this.worldMapColumns = worldMapColumns;
 
+
+
         worldIntMap = new int[worldMapRows][worldMapColumns];
 
         Vector2 mapseed = new Vector2(MathUtils.random(worldIntMap[0].length), MathUtils.random(worldIntMap.length));
         System.out.println(mapseed.y + " " + mapseed.x);
 
-        worldIntMap[(int)mapseed.y][(int)mapseed.x] = 4;
+        worldIntMap[(int)mapseed.y][(int)mapseed.x] = 13;
+
+        for(int r = 0; r < worldIntMap.length; r ++) {
+            for (int c = 0; c < worldIntMap[r].length; c++) {
+                int n = MathUtils.random(1, 4);
+                if (n == 1) {
+                    worldIntMap[r][c] = 19;
+                } else if (n == 2 || n == 3) {
+                    worldIntMap[r][c] = 20;
+                } else if (n == 4) {
+                    worldIntMap[r][c] = 21;
+                }
+
+            }
+        }
 
         for(int r = 0; r < worldIntMap.length; r ++) {
             for( int c = 0; c < worldIntMap[r].length; c++) {
                 Vector2 tempVector = new Vector2(c, r);
-                if(tempVector.dst(mapseed) < 7) {
-                    worldIntMap[r][c] = 18;
-                    worldIntMap[r + 2][c + 1] = 19;
-                    worldIntMap[r + 1][c - 2] = 19;
-                    worldIntMap[r + 1][c - 1] = 19;
+                if(tempVector.dst(mapseed) < 10) {
+                    worldIntMap[r][c] = 16;
+                    if(tempVector.dst(mapseed) < 7) {
+                        worldIntMap[r][c] = 17;
+
+                    }
                 }
             }
         }
@@ -43,7 +60,7 @@ public class WorldGenerator {
 
 
         //call methods to build 2D array
-        //randomize();
+
         //leftCoast();
         //generateWorldTextFile();
 
@@ -75,11 +92,17 @@ public class WorldGenerator {
     public void randomize() {
         for(int r = 0; r < worldIntMap.length; r++) {
             for(int c = 0; c < worldIntMap[r].length; c++) {
+                    int n = MathUtils.random(0,1);
+                if (n == 0 && r < worldIntMap.length - 2) {
                     worldIntMap[r][c] = 19;
+                    worldIntMap[r + 1][c] = 20;
+                }
+                else {
+                    worldIntMap[r][c] = 20;
+                }
             }
         }
     }
-
     public WorldTile[][] generateWorld() {
         WorldTile[][] worldTileMap = new WorldTile[worldMapRows][worldMapColumns];
         for(int r = 0; r < worldIntMap.length; r++) {

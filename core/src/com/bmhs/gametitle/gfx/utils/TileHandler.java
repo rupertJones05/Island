@@ -17,6 +17,7 @@ public class TileHandler {
 
     private final String primaryColorSheetPath = "primaryColorSheet.png";
 
+
     private Array<WorldTile> worldTileArray;
 
     private TileHandler() {
@@ -30,6 +31,7 @@ public class TileHandler {
         worldTileArray.add(new WorldTile(new TextureRegion(new Texture(primaryColorSheetPath), 0, 0, spriteOnSheetWidth, spriteOnSheetHeight), 0, "transparent"));
 
         createWorldTiles(primaryColorSheetPath, "primary color", worldTileArray);
+        //createWorldTiles("minitrees.png", "trees", worldTileArray);
 
     }
 
