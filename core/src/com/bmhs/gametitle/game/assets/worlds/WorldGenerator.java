@@ -22,49 +22,53 @@ public class WorldGenerator {
         this.worldMapColumns = worldMapColumns;
 
 
-
         worldIntMap = new int[worldMapRows][worldMapColumns];
 
         Vector2 mapseed = new Vector2(MathUtils.random(worldIntMap[0].length), MathUtils.random(worldIntMap.length));
         System.out.println(mapseed.y + " " + mapseed.x);
 
-        worldIntMap[(int)mapseed.y][(int)mapseed.x] = 13;
+        worldIntMap[(int) mapseed.y][(int) mapseed.x] = 20;
 
-        for(int r = 0; r < worldIntMap.length; r ++) {
+        for (int r = 0; r < worldIntMap.length; r++) {
             for (int c = 0; c < worldIntMap[r].length; c++) {
-                int n = MathUtils.random(1, 4);
-                if (n == 1) {
-                    worldIntMap[r][c] = 19;
-                } else if (n == 2 || n == 3) {
-                    worldIntMap[r][c] = 20;
-                } else if (n == 4) {
-                    worldIntMap[r][c] = 21;
-                }
-
+                worldIntMap[r][c] = 21;
             }
         }
 
-        for(int r = 0; r < worldIntMap.length; r ++) {
-            for( int c = 0; c < worldIntMap[r].length; c++) {
-                Vector2 tempVector = new Vector2(c, r);
-                if(tempVector.dst(mapseed) < 10) {
-                    worldIntMap[r][c] = 16;
-                    if(tempVector.dst(mapseed) < 7) {
-                        worldIntMap[r][c] = 17;
 
+        /*for (int r = 0; r < worldIntMap.length; r++) {
+            for (int c = 0; c < worldIntMap[r].length; c++) {
+                Vector2 tempVector = new Vector2(c, r);
+                if (tempVector.dst(mapseed) < 5) {
+                    worldIntMap[(int) mapseed.y][(int) mapseed.x] = 19;
+                    worldIntMap[r][c] = 20;
+                    if (worldIntMap[(int) mapseed.y][(int) mapseed.x] == 19) {
+                        int radius = 1;
+                        for (int row = r - radius; row <= r + radius; row++) {
+                            for (int col = c - radius; col <= c + radius; col++) {
+                                if (row >= 0 && col >= 0 && row <= worldIntMap.length - 1 && col < worldIntMap[r].length - 1) {
+                                    worldIntMap[row + 1][col -1] = 14;
+                                }
+                            }
+                        }
                     }
                 }
             }
-        }
-
-
-
+        }*/
+    }
         //call methods to build 2D array
 
         //leftCoast();
         //generateWorldTextFile();
 
-        Gdx.app.error("WorldGenerator", "WorldGenerator(WorldTile[][][])");
+        //Gdx.app.error("WorldGenerator", "WorldGenerator(WorldTile[][][])");
+
+
+    public void generateIsland() {
+        Vector2 seed = new Vector2(MathUtils.random(worldIntMap[0].length), MathUtils.random(worldIntMap.length));
+        for(int i = 0; i < 6; i++) {
+
+        }
     }
 
     public String getWorld3DArrayToString() {
