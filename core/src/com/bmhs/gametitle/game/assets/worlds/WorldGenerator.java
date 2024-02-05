@@ -3,6 +3,7 @@ package com.bmhs.gametitle.game.assets.worlds;
 import com.badlogic.gdx.Gdx;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.bmhs.gametitle.gfx.assets.tiles.statictiles.WorldTile;
@@ -34,28 +35,37 @@ public class WorldGenerator {
                 worldIntMap[r][c] = 21;
             }
         }
+//        for (int rad = 6; rad > 0; rad--) {
+//            int radius = MathUtils.random(1, rad);
+            for (int r = 0; r < worldIntMap.length; r++) {
+                for (int c = 0; c < worldIntMap[r].length; c++) {
+                    Vector2 tempVector = new Vector2(c, r);
+                    if (tempVector.dst(mapseed) < 7) {
 
+//                        if(rad == 6){
+//                            color = 5;
+//                        } else if(rad == 5){
+//                            color = 6;
+//                        } else if(rad == 4){
+//                            color = 7;
+//                        } else if(rad == 3){
+//                            color = 8;
+//                        } else if(rad == 2){
+//                            color = 9;
+//                        } else if (rad == 1) {
+//                            color = 10;
+//                        }
 
-        /*for (int r = 0; r < worldIntMap.length; r++) {
-            for (int c = 0; c < worldIntMap[r].length; c++) {
-                Vector2 tempVector = new Vector2(c, r);
-                if (tempVector.dst(mapseed) < 5) {
-                    worldIntMap[(int) mapseed.y][(int) mapseed.x] = 19;
-                    worldIntMap[r][c] = 20;
-                    if (worldIntMap[(int) mapseed.y][(int) mapseed.x] == 19) {
-                        int radius = 1;
-                        for (int row = r - radius; row <= r + radius; row++) {
-                            for (int col = c - radius; col <= c + radius; col++) {
-                                if (row >= 0 && col >= 0 && row <= worldIntMap.length - 1 && col < worldIntMap[r].length - 1) {
-                                    worldIntMap[row + 1][col -1] = 14;
-                                }
-                            }
-                        }
+                        worldIntMap[(int) mapseed.y][(int) mapseed.x] = 18;
+                        worldIntMap[r][c] = 18;
                     }
                 }
             }
-        }*/
-    }
+        }
+
+
+
+
         //call methods to build 2D array
 
         //leftCoast();
@@ -64,12 +74,21 @@ public class WorldGenerator {
         //Gdx.app.error("WorldGenerator", "WorldGenerator(WorldTile[][][])");
 
 
-    public void generateIsland() {
+    /*public void generateIsland() {
         Vector2 seed = new Vector2(MathUtils.random(worldIntMap[0].length), MathUtils.random(worldIntMap.length));
-        for(int i = 0; i < 6; i++) {
 
-        }
-    }
+        for(int r = 0; r < worldIntMap.length; r++)
+        for(int c = 0; c < worldIntMap[r].length ; c++) {
+                Vector2 tempVector1 = new Vector2(c,r);
+                if (tempVector1.dst(seed) < radius) {
+                    worldIntMap[(int) seed.y][(int) seed.x] = 19;
+                    worldIntMap[r][c] = 5;
+
+
+                }
+            }
+
+        }*/
 
     public String getWorld3DArrayToString() {
         String returnString = "";
