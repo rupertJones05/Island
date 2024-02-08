@@ -18,7 +18,7 @@ public class WorldGenerator {
 
     private int[][] worldIntMap;
 
-    public WorldGenerator (int worldMapRows, int worldMapColumns) {
+    public WorldGenerator(int worldMapRows, int worldMapColumns) {
         this.worldMapRows = worldMapRows;
         this.worldMapColumns = worldMapColumns;
 
@@ -35,33 +35,62 @@ public class WorldGenerator {
                 worldIntMap[r][c] = 21;
             }
         }
-//        for (int rad = 6; rad > 0; rad--) {
-//            int radius = MathUtils.random(1, rad);
+        generateIslands(3);
+        generateIslands(2);
+        generateIslands(1);
+
+    }
+
+
+    public void generateIslands(int num) {
+        int x = MathUtils.random(15, worldIntMap.length - 15);
+        int y = MathUtils.random(15, worldIntMap[0].length - 15);
+        for(int i = 0; i < num; i++) {
+            generateIsland(x + MathUtils.random(-10,10),y + MathUtils.random(-10,10));
+        }
+    }
+    public void generateIsland(int x, int y) {
+
+        Vector2 mapseed = new Vector2(x, y);
+        for (int rad = 6; rad > 0; rad--) {
             for (int r = 0; r < worldIntMap.length; r++) {
                 for (int c = 0; c < worldIntMap[r].length; c++) {
                     Vector2 tempVector = new Vector2(c, r);
-                    if (tempVector.dst(mapseed) < 7) {
+                    int radius = 1;
+                    if(rad == 6) {
+                        radius = MathUtils.random(5,6);
+                    }
+                    else {
+                        radius = MathUtils.random(1, rad);
+                    }
+                    if (tempVector.dst(mapseed) < radius*2) {
+                        if (rad == 6) {
+                            worldIntMap[r][c] = 20;
+                        }
+                        if (rad == 5) {
+                            worldIntMap[r][c] = 5;
+                        }
+                        if (rad == 4) {
+                            worldIntMap[r][c] = 6;
+                        }
+                        if (rad == 3) {
+                            worldIntMap[r][c] = 7;
+                        }
+                        if (rad == 2) {
+                            worldIntMap[r][c] = 8;
+                        }
+                        if (rad == 1) {
+                            worldIntMap[r][c] = 9;
+                        }
 
-//                        if(rad == 6){
-//                            color = 5;
-//                        } else if(rad == 5){
-//                            color = 6;
-//                        } else if(rad == 4){
-//                            color = 7;
-//                        } else if(rad == 3){
-//                            color = 8;
-//                        } else if(rad == 2){
-//                            color = 9;
-//                        } else if (rad == 1) {
-//                            color = 10;
-//                        }
 
-                        worldIntMap[(int) mapseed.y][(int) mapseed.x] = 18;
-                        worldIntMap[r][c] = 18;
                     }
                 }
             }
         }
+    }
+
+
 
 
 
