@@ -37,7 +37,7 @@ public class WorldGenerator {
         }
         generateIslands(3);
         generateIslands(2);
-        generateIslands(1);
+        generateIslands(2);
 
     }
 
