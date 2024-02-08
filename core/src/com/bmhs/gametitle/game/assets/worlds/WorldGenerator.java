@@ -15,6 +15,7 @@ import java.util.logging.FileHandler;
 public class WorldGenerator {
 
     private int worldMapRows, worldMapColumns;
+    int a = 0;
 
     private int[][] worldIntMap;
 
