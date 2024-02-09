@@ -36,18 +36,23 @@ public class WorldGenerator {
                 worldIntMap[r][c] = 21;
             }
         }
-        generateIslands(3);
+
+        generateIslands(5);
         generateIslands(2);
+        generateIslands(4);
+        generateIslands(1);
         generateIslands(2);
 
     }
 
 
     public void generateIslands(int num) {
-        int x = MathUtils.random(15, worldIntMap.length - 15);
-        int y = MathUtils.random(15, worldIntMap[0].length - 15);
-        for(int i = 0; i < num; i++) {
-            generateIsland(x + MathUtils.random(-10,10),y + MathUtils.random(-10,10));
+        if (num > 1) {
+            int x = MathUtils.random(0, worldIntMap.length);
+            int y = MathUtils.random(0, worldIntMap[0].length);
+            for (int i = 0; i < num; i++) {
+                generateIsland(x + MathUtils.random(-12,12), y + MathUtils.random(-12,12));
+            }
         }
     }
     public void generateIsland(int x, int y) {
@@ -58,33 +63,52 @@ public class WorldGenerator {
                 for (int c = 0; c < worldIntMap[r].length; c++) {
                     Vector2 tempVector = new Vector2(c, r);
                     int radius = 1;
-                    if(rad == 6) {
-                        radius = MathUtils.random(5,6);
-                    }
-                    else {
+                    if (rad == 6) {
+                        radius = MathUtils.random(5, 6);
+                    } else {
                         radius = MathUtils.random(1, rad);
                     }
-                    if (tempVector.dst(mapseed) < radius*2) {
-                        if (rad == 6) {
-                            worldIntMap[r][c] = 20;
-                        }
-                        if (rad == 5) {
-                            worldIntMap[r][c] = 5;
-                        }
-                        if (rad == 4) {
-                            worldIntMap[r][c] = 6;
-                        }
-                        if (rad == 3) {
-                            worldIntMap[r][c] = 7;
-                        }
-                        if (rad == 2) {
-                            worldIntMap[r][c] = 8;
-                        }
-                        if (rad == 1) {
-                            worldIntMap[r][c] = 9;
-                        }
+                    if (r >= 0 && c >= 0 && r <= worldIntMap.length - 1 && c < worldIntMap[r].length - 1) {
+                        if (tempVector.dst(mapseed) < radius * 2) {
+                            if (rad == 6 && worldIntMap[r][c] == 21) {
+                                worldIntMap[r][c] = 16;
+
+                            }
+                            if (rad == 5 && worldIntMap[r][c] != 16 && worldIntMap[r][c] == 8) {
+                                worldIntMap[r][c] = 8;
+                            }
+                            if (rad == 4) {
+                                worldIntMap[r][c] = 8;
+                            }
+                            if (rad == 3) {
+                                worldIntMap[r][c] = 7;
+                            }
+                            if (rad == 2) {
+                                worldIntMap[r][c] = 6;
+                            }
+                            if (rad == 1) {
+                                worldIntMap[r][c] = 5;
+                                worldIntMap[(int) mapseed.y][(int) mapseed.x] = 5;
+                                int n = MathUtils.random(1, 4);
+                                if (n == 1) {
+                                    worldIntMap[((int) mapseed.y) + 1][((int) mapseed.x)] = 5;
+                                    worldIntMap[((int) mapseed.y) + 2][((int) mapseed.x) - 1] = 5;
+                                }
+                                if (n == 2) {
+                                    worldIntMap[((int) mapseed.y) - 2][((int) mapseed.x)] = 5;
+                                    worldIntMap[((int) mapseed.y) - 1][((int) mapseed.x) + 2] = 5;
+                                }
+                                if (n == 3) {
+                                    worldIntMap[((int) mapseed.y) + 3][((int) mapseed.x)] = 5;
+                                } else {
+                                    worldIntMap[((int) mapseed.y)][((int) mapseed.x) + 3] = 5;
+                                    worldIntMap[((int) mapseed.y)][((int) mapseed.x) - 3] = 5;
+                                    worldIntMap[((int) mapseed.y) + 2][((int) mapseed.x)] = 5;
+                                }
+                            }
 
 
+                        }
                     }
                 }
             }

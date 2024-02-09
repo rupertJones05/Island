@@ -50,7 +50,7 @@ public class WorldGenTestScreen implements Screen {
         viewport.setScreenBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // Change number of rows and columns to change the size of the world
-        world = new World(100, 175);
+        world = new World(100, 300);
 
         camera.update();
         player = new PlayerCharacter(TileHandler.getTileHandler().getWorldTileArray().get(16), 100, 200);
