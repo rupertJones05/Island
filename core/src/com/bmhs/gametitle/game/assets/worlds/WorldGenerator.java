@@ -38,20 +38,18 @@ public class WorldGenerator {
         }
 
         generateIslands(5);
-        generateIslands(2);
-        generateIslands(4);
-        generateIslands(1);
-        generateIslands(2);
+        generateIslands(6);
+        generateIslands(5);
 
     }
 
 
     public void generateIslands(int num) {
         if (num > 1) {
-            int x = MathUtils.random(0, worldIntMap.length);
-            int y = MathUtils.random(0, worldIntMap[0].length);
+            int y = MathUtils.random(0, worldIntMap.length);
+            int x = MathUtils.random(0, worldIntMap[0].length);
             for (int i = 0; i < num; i++) {
-                generateIsland(x + MathUtils.random(-12,12), y + MathUtils.random(-12,12));
+                generateIsland(x + MathUtils.random(-5,5), y + MathUtils.random(-5,5));
             }
         }
     }
